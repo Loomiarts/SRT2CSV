@@ -1,0 +1,98 @@
+[gd_scene format=2]
+
+[node name="MainView" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+custom_constants/separation = 20
+
+[node name="Step1Label" type="Label" parent="PanelContainer/VBox"]
+margin_right = 1010.0
+margin_bottom = 14.0
+text = "1. Select the source .srt files:"
+uppercase = true
+
+[node name="SelectSRTButton" type="Button" parent="PanelContainer/VBox"]
+margin_top = 34.0
+margin_right = 119.0
+margin_bottom = 54.0
+size_flags_horizontal = 0
+text = "Select .srt files..."
+
+[node name="XFilesSelectedLabel" type="Label" parent="PanelContainer/VBox"]
+margin_top = 74.0
+margin_right = 1010.0
+margin_bottom = 88.0
+text = "X .srt files selected."
+
+[node name="Step2Label" type="Label" parent="PanelContainer/VBox"]
+margin_top = 108.0
+margin_right = 1010.0
+margin_bottom = 122.0
+text = "2. Select .srt files with alternative timecodes:"
+uppercase = true
+
+[node name="SelectAlternativeTimecodesSRTButton" type="Button" parent="PanelContainer/VBox"]
+margin_top = 142.0
+margin_right = 263.0
+margin_bottom = 162.0
+size_flags_horizontal = 0
+text = "Select alternative timecodes .srt files..."
+
+[node name="HBox" type="HBoxContainer" parent="PanelContainer/VBox"]
+margin_top = 182.0
+margin_right = 1010.0
+margin_bottom = 206.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LanguageCodeLabel" type="Label" parent="PanelContainer/VBox/HBox"]
+margin_top = 5.0
+margin_right = 241.0
+margin_bottom = 19.0
+text = "Alternative timecodes language code:"
+
+[node name="LanguageCodeEdit" type="LineEdit" parent="PanelContainer/VBox/HBox"]
+margin_left = 245.0
+margin_right = 303.0
+margin_bottom = 24.0
+text = "pt-BR"
+
+[node name="XAlternativeTimecodesFilesSelectedLabel" type="Label" parent="PanelContainer/VBox"]
+margin_top = 226.0
+margin_right = 1010.0
+margin_bottom = 240.0
+text = "X .srt files selected for alternative timecodes."
+
+[node name="Step3Label" type="Label" parent="PanelContainer/VBox"]
+margin_top = 260.0
+margin_right = 1010.0
+margin_bottom = 274.0
+text = "3. Save the CSV file:"
+uppercase = true
+
+[node name="SaveButton" type="Button" parent="PanelContainer/VBox"]
+margin_top = 294.0
+margin_right = 104.0
+margin_bottom = 314.0
+size_flags_horizontal = 0
+text = "Save CSV file..."
+
+[node name="ResultLabel" type="Label" parent="PanelContainer/VBox"]
+margin_top = 334.0
+margin_right = 1010.0
+margin_bottom = 348.0
+text = "Result"

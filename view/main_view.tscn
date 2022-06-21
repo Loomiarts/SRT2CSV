@@ -84,15 +84,25 @@ margin_bottom = 274.0
 text = "3. Save the CSV file:"
 uppercase = true
 
-[node name="SaveButton" type="Button" parent="PanelContainer/VBox"]
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/VBox"]
 margin_top = 294.0
+margin_right = 1010.0
+margin_bottom = 318.0
+pressed = true
+text = "Convert initial time to zero"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="Button" parent="PanelContainer/VBox"]
+margin_top = 338.0
 margin_right = 104.0
-margin_bottom = 314.0
+margin_bottom = 358.0
 size_flags_horizontal = 0
 text = "Save CSV file..."
 
 [node name="ResultLabel" type="Label" parent="PanelContainer/VBox"]
-margin_top = 334.0
+margin_top = 378.0
 margin_right = 1010.0
-margin_bottom = 348.0
+margin_bottom = 392.0
 text = "Result"

@@ -8,10 +8,61 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "MainViewModel",
+"language": "GDScript",
+"path": "res://view_model/main_view_model.gd"
+}, {
+"base": "Reference",
+"class": "S51Subtitle",
+"language": "GDScript",
+"path": "res://model/s51_subtitle.gd"
+}, {
+"base": "Reference",
+"class": "SRTSubtitle",
+"language": "GDScript",
+"path": "res://model/srt_subtitle.gd"
+}, {
+"base": "Reference",
+"class": "WAT",
+"language": "GDScript",
+"path": "res://addons/WAT/namespace.gd"
+}, {
+"base": "Node",
+"class": "WATTest",
+"language": "GDScript",
+"path": "res://addons/WAT/test/test.gd"
+} ]
+_global_script_class_icons={
+"MainViewModel": "",
+"S51Subtitle": "",
+"SRTSubtitle": "",
+"WAT": "",
+"WATTest": ""
+}
+
+[WAT]
+
+Test_Directory="res://test"
+Results_Directory="res://test/results"
+Test_Metadata_Directory="res://test/metadata"
+Tags=PoolStringArray(  )
+Cache_Tests=true
+Window_Size=Vector2( 1280, 720 )
+Minimize_Window_When_Running_Tests=false
+Port=6008
+Display=8
+
 [application]
 
 config/name="SRT2CSV"
+run/main_scene="res://view/main_view.tscn"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/WAT/plugin.cfg" )
 
 [physics]
 

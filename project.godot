@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://model/s51_subtitle.gd"
 }, {
 "base": "Reference",
+"class": "SRTFile",
+"language": "GDScript",
+"path": "res://model/srt_file.gd"
+}, {
+"base": "Reference",
 "class": "SRTSubtitle",
 "language": "GDScript",
 "path": "res://model/srt_subtitle.gd"
@@ -47,6 +52,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "MainViewModel": "",
 "S51Subtitle": "",
+"SRTFile": "",
 "SRTSubtitle": "",
 "Timecode": "",
 "TimecodeSpan": "",

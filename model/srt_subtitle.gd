@@ -2,8 +2,6 @@
 class_name SRTSubtitle
 extends Reference
 
-var timecode_start = ""
-
-var timecode_end = ""
+var time: TimecodeSpan = TimecodeSpan.new()
 
 var text = ""

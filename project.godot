@@ -25,6 +25,16 @@ _global_script_classes=[ {
 "path": "res://model/srt_subtitle.gd"
 }, {
 "base": "Reference",
+"class": "Timecode",
+"language": "GDScript",
+"path": "res://model/timecode.gd"
+}, {
+"base": "Reference",
+"class": "TimecodeSpan",
+"language": "GDScript",
+"path": "res://model/timecode_span.gd"
+}, {
+"base": "Reference",
 "class": "WAT",
 "language": "GDScript",
 "path": "res://addons/WAT/namespace.gd"
@@ -38,6 +48,8 @@ _global_script_class_icons={
 "MainViewModel": "",
 "S51Subtitle": "",
 "SRTSubtitle": "",
+"Timecode": "",
+"TimecodeSpan": "",
 "WAT": "",
 "WATTest": ""
 }

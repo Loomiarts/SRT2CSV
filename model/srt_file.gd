@@ -4,7 +4,19 @@ extends Reference
 
 var file_path = ""
 
-var content = ""
+var subtitles = []
+
+
+func set_content(text_content: String):
+	var regex = RegEx.new()
+	regex.compile("\\d+\\n(\\d\\d:\\d\\d:\\d\\d,\\d\\d\\d --> \\d\\d:\\d\\d:\\d\\d,\\d\\d\\d)\\n((?:.*(?:\\n[^\\n])?)*)")
+	var regex_matches = regex.search_all(text_content)
+	subtitles = []
+	for regex_match in regex_matches:
+		var subtitle = SRTSubtitle.new()
+		subtitle.time.string_value = regex_match.strings[1]
+		subtitle.text = regex_match.strings[2]
+		subtitles.append(subtitle)
 
 
 func get_name_without_extension() -> String:
@@ -13,26 +25,20 @@ func get_name_without_extension() -> String:
 	return basename.substr(dir.length() + 1)
 
 
-func get_subtitles() -> Array:
-	var regex = RegEx.new()
-	regex.compile("\\d+\\n(\\d\\d:\\d\\d:\\d\\d,\\d\\d\\d --> \\d\\d:\\d\\d:\\d\\d,\\d\\d\\d)\\n((?:.*(?:\\n[^\\n])?)*)")
-	var regex_matches = regex.search_all(content)
-	var subtitles = []
-	for regex_match in regex_matches:
-		var subtitle = SRTSubtitle.new()
-		subtitle.time.string_value = regex_match.strings[1]
-		subtitle.text = regex_match.strings[2]
-		subtitles.append(subtitle)
-	return subtitles
-
-
 func convert_to_internal_format_subtitles() -> String:
 	var result = ""
-	var srt_subtitles = get_subtitles()
-	for srt_subtitle in srt_subtitles:
+	for srt_subtitle in subtitles:
 		if result.length() > 0:
 			result += "\n\n"
 		var s51_subtitle = S51Subtitle.new()
 		s51_subtitle.initialize_with_srt_subtitle(srt_subtitle)
 		result += s51_subtitle.to_string()
 	return result
+
+
+func offset_to_start_time_zero():
+	if subtitles.size() > 0:
+		var offset_time = -subtitles[0].time.start.seconds
+		for subtitle in subtitles:
+			subtitle.time.offset(offset_time)
+

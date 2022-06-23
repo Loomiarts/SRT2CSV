@@ -2,22 +2,6 @@ class_name SubtitleService
 extends Reference
 
 
-func convert_srt_files_to_csv_file(srt_files_paths: Array, csv_file_path: String):
-	var keys = []
-	var subtitles_by_key = {}
-	for srt_file_path in srt_files_paths:
-		var srt_file = load_srt_file(srt_file_path)
-		var key = srt_file.get_name_without_extension()
-		keys.append(key)
-		subtitles_by_key[key] = srt_file.convert_to_internal_format_subtitles()
-	keys.sort()
-	var csv_rows_and_columns = []
-	csv_rows_and_columns.append(["Key", "SourceString", "Comment"])
-	for key in keys:
-		csv_rows_and_columns.append([key, subtitles_by_key[key]])
-	save_csv(csv_rows_and_columns, csv_file_path)
-
-
 func convert_srt_files_to_csv_rows_and_columns(srt_files: Array) -> Array:
 	var keys = []
 	var subtitles_by_key = {}
@@ -38,7 +22,7 @@ func load_srt_file(path: String) -> SRTFile:
 	srt_file.file_path = path
 	var file = File.new()
 	file.open(path, File.READ)
-	srt_file.content = file.get_as_text()
+	srt_file.set_content(file.get_as_text())
 	return srt_file
 
 

@@ -25,19 +25,19 @@ func test_should_convert_srt_files_to_csv_rows_and_columns():
 	# given:
 	var srt1 = SRTFile.new()
 	srt1.file_path = "srts/sub1.srt"
-	srt1.content = """1
+	srt1.set_content("""1
 00:00:00,000 --> 00:00:02,000
 Line 1.
 
 2
 00:00:02,000 --> 00:00:04,000
-Line 2."""
+Line 2.""")
 	
 	var srt2 = SRTFile.new()
 	srt2.file_path = "srts/sub2.srt"
-	srt2.content = """1
+	srt2.set_content("""1
 00:00:00,000 --> 00:00:02,000
-Another line."""
+Another line.""")
 	
 	# when:
 	var result = service.convert_srt_files_to_csv_rows_and_columns([srt1, srt2])

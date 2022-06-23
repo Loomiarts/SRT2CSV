@@ -20,7 +20,19 @@ func get_subtitles() -> Array:
 	var subtitles = []
 	for regex_match in regex_matches:
 		var subtitle = SRTSubtitle.new()
-		subtitle.time = regex_match.strings[1]
+		subtitle.time.string_value = regex_match.strings[1]
 		subtitle.text = regex_match.strings[2]
 		subtitles.append(subtitle)
 	return subtitles
+
+
+func convert_to_internal_format_subtitles() -> String:
+	var result = ""
+	var srt_subtitles = get_subtitles()
+	for srt_subtitle in srt_subtitles:
+		if result.length() > 0:
+			result += "\n\n"
+		var s51_subtitle = S51Subtitle.new()
+		s51_subtitle.initialize_with_srt_subtitle(srt_subtitle)
+		result += s51_subtitle.to_string()
+	return result

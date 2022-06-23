@@ -52,7 +52,7 @@ func test_to_string():
 	subtitle.text = "Example text."
 	
 	# then:
-	asserts.is_equal(subtitle.to_string(), "00:01:15,123 --> 00:02:15,123\nExample text.\n\n")
+	asserts.is_equal(subtitle.to_string(), "00:01:15,123 --> 00:02:15,123\nExample text.")
 
 
 func test_to_with_alternative_timecodes():
@@ -64,5 +64,5 @@ func test_to_with_alternative_timecodes():
 	subtitle.text = "Example text."
 	
 	# then:
-	asserts.is_equal(subtitle.to_string(), "00:01:15,123 --> 00:02:15,123\n(pt-BR) 00:02:15,123 --> 00:03:15,123\nExample text.\n\n")
+	asserts.is_equal(subtitle.to_string(), "00:01:15,123 --> 00:02:15,123\n(pt-BR) 00:02:15,123 --> 00:03:15,123\nExample text.")
 

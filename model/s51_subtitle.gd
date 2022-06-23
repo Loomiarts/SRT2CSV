@@ -23,5 +23,5 @@ func _to_string():
 	var result = "%s\n" % time.to_string()
 	for language_code in alternative_timecodes_by_language_code:
 		result += "(%s) %s\n" % [language_code, alternative_timecodes_by_language_code[language_code].to_string()]
-	result += "%s\n\n" % text
+	result += text
 	return result

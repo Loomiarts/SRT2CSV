@@ -42,36 +42,38 @@ line 5.""")
 
 func test_should_convert_to_internal_format():
 	# given:
-	srt_file.set_content("""
-1
-00:00:00,000 --> 00:00:10,000
-Line 1.
-
-2
-00:00:20,000 --> 00:00:30,000
-Line 2.""")
+	var subtitle1 = SRTSubtitle.new()
+	subtitle1.time.string_value = "00:00:00,000 --> 00:00:10,000"
+	subtitle1.text = "Line 1."
+	
+	var subtitle2 = SRTSubtitle.new()
+	subtitle2.time.string_value = "00:00:20,000 --> 00:00:30,000"
+	subtitle2.text = "Line 2."
+	
+	srt_file.subtitles = [subtitle1, subtitle2]
 	
 	# when:
 	var result = srt_file.convert_to_internal_format_subtitles()
 	
 	# then:
-	asserts.is_equal(result, """00:00:00,000 --> 00:00:10,000
-Line 1.
-
-00:00:20,000 --> 00:00:30,000
-Line 2.""")
+	asserts.is_equal(result.size(), 2)
+	asserts.is_equal(result[0].time.to_string(), "00:00:00,000 --> 00:00:10,000")
+	asserts.is_equal(result[0].text, "Line 1.")
+	asserts.is_equal(result[1].time.to_string(), "00:00:20,000 --> 00:00:30,000")
+	asserts.is_equal(result[1].text, "Line 2.")
 
 
 func test_should_offset_to_zero():
 	# given:
-	srt_file.set_content("""
-1
-00:00:02,000 --> 00:00:10,000
-Line 1.
-
-2
-00:00:20,000 --> 00:00:30,000
-Line 2.""")
+	var subtitle1 = SRTSubtitle.new()
+	subtitle1.time.string_value = "00:00:02,000 --> 00:00:10,000"
+	subtitle1.text = "Line 1."
+	
+	var subtitle2 = SRTSubtitle.new()
+	subtitle2.time.string_value = "00:00:20,000 --> 00:00:30,000"
+	subtitle2.text = "Line 2."
+	
+	srt_file.subtitles = [subtitle1, subtitle2]
 	
 	# when:
 	srt_file.offset_to_start_time_zero()

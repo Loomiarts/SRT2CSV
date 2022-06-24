@@ -16,7 +16,8 @@ func initialize_with_srt_subtitle(srt_subtitle: SRTSubtitle):
 
 
 func add_subtitle_as_alternative_timecode(subtitle, language_code: String):
-	alternative_timecodes_by_language_code[language_code] = subtitle.time.duplicate()
+	if subtitle.time.to_string() != self.time.to_string():
+		alternative_timecodes_by_language_code[language_code] = subtitle.time.duplicate()
 
 
 func _to_string():

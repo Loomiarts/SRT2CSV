@@ -45,6 +45,26 @@ func test_add_srt_subtitle_as_alternative_timecode():
 	asserts.is_equal(subtitle.alternative_timecodes_by_language_code["pt-BR"].end.string_value, "00:02:17,123")
 
 
+func test_should_not_add_srt_subtitle_as_alternative_timecode_if_timecode_is_equal_to_default():
+	# given:
+	subtitle.time.start.string_value = "00:01:15,123"
+	subtitle.time.end.string_value = "00:02:15,123"
+	subtitle.text = "Example text."
+	
+	var alt_timecode_subtitle = S51Subtitle.new()
+	alt_timecode_subtitle.time.start.string_value = "00:01:15,123"
+	alt_timecode_subtitle.time.end.string_value = "00:02:15,123"
+	
+	# when:
+	subtitle.add_subtitle_as_alternative_timecode(alt_timecode_subtitle, "pt-BR")
+	
+	# then:
+	asserts.is_equal(subtitle.time.start.string_value, "00:01:15,123")
+	asserts.is_equal(subtitle.time.end.string_value, "00:02:15,123")
+	asserts.is_equal(subtitle.text, "Example text.")
+	asserts.is_equal(subtitle.alternative_timecodes_by_language_code.size(), 0)
+
+
 func test_to_string():
 	# given:
 	subtitle.time.start.string_value = "00:01:15,123"

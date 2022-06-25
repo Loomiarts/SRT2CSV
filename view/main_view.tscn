@@ -37,30 +37,40 @@ margin_bottom = 54.0
 size_flags_horizontal = 0
 text = "Select .srt files..."
 
-[node name="XFilesSelectedLabel" type="Label" parent="PanelContainer/VBox"]
+[node name="FilesSelectedLabel" type="Label" parent="PanelContainer/VBox"]
 margin_top = 74.0
 margin_right = 1010.0
 margin_bottom = 88.0
-text = "X .srt files selected."
+text = "Selected files paths:"
 
-[node name="Step2Label" type="Label" parent="PanelContainer/VBox"]
+[node name="SelectedPathsEditText" type="TextEdit" parent="PanelContainer/VBox"]
 margin_top = 108.0
 margin_right = 1010.0
-margin_bottom = 122.0
+margin_bottom = 316.0
+rect_min_size = Vector2( 0, 150 )
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Step2Label" type="Label" parent="PanelContainer/VBox"]
+margin_top = 336.0
+margin_right = 1010.0
+margin_bottom = 350.0
 text = "2. Select .srt files with alternative timecodes:"
 uppercase = true
 
 [node name="SelectAlternativeTimecodesSRTButton" type="Button" parent="PanelContainer/VBox"]
-margin_top = 142.0
+margin_top = 370.0
 margin_right = 263.0
-margin_bottom = 162.0
+margin_bottom = 390.0
 size_flags_horizontal = 0
 text = "Select alternative timecodes .srt files..."
 
 [node name="HBox" type="HBoxContainer" parent="PanelContainer/VBox"]
-margin_top = 182.0
+margin_top = 410.0
 margin_right = 1010.0
-margin_bottom = 206.0
+margin_bottom = 434.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -77,31 +87,31 @@ margin_right = 303.0
 margin_bottom = 24.0
 
 [node name="XAlternativeTimecodesFilesSelectedLabel" type="Label" parent="PanelContainer/VBox"]
-margin_top = 226.0
+margin_top = 454.0
 margin_right = 1010.0
-margin_bottom = 240.0
+margin_bottom = 468.0
 text = "X .srt files selected for alternative timecodes."
 
 [node name="Step3Label" type="Label" parent="PanelContainer/VBox"]
-margin_top = 260.0
+margin_top = 488.0
 margin_right = 1010.0
-margin_bottom = 274.0
+margin_bottom = 502.0
 text = "3. Save the CSV file:"
 uppercase = true
 
 [node name="ConvertInitialTimeToZeroCheckBox" type="CheckBox" parent="PanelContainer/VBox"]
-margin_top = 294.0
+margin_top = 522.0
 margin_right = 1010.0
-margin_bottom = 318.0
+margin_bottom = 546.0
 text = "Convert initial time to zero"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SaveButton" type="Button" parent="PanelContainer/VBox"]
-margin_top = 338.0
+margin_top = 566.0
 margin_right = 104.0
-margin_bottom = 358.0
+margin_bottom = 586.0
 size_flags_horizontal = 0
 text = "Save CSV file..."
 
@@ -148,6 +158,7 @@ current_dir = "/Projects/SRT2CSV"
 current_path = "/Projects/SRT2CSV/"
 
 [connection signal="pressed" from="PanelContainer/VBox/SelectSRTButton" to="." method="_on_SelectSRTButton_pressed"]
+[connection signal="text_changed" from="PanelContainer/VBox/SelectedPathsEditText" to="." method="_on_SelectedPathsEditText_text_changed"]
 [connection signal="pressed" from="PanelContainer/VBox/SelectAlternativeTimecodesSRTButton" to="." method="_on_SelectAlternativeTimecodesSRTButton_pressed"]
 [connection signal="text_changed" from="PanelContainer/VBox/HBox/LanguageCodeEdit" to="." method="_on_LanguageCodeEdit_text_changed"]
 [connection signal="toggled" from="PanelContainer/VBox/ConvertInitialTimeToZeroCheckBox" to="." method="_on_ConvertInitialTimeToZeroCheckBox_toggled"]

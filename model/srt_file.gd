@@ -25,12 +25,13 @@ func get_name_without_extension() -> String:
 	return basename.substr(dir.length() + 1)
 
 
-func convert_to_internal_format_subtitles() -> Array:
-	var result = []
+func convert_to_s51_subtitles() -> S51Subtitles:
+	var result = S51Subtitles.new()
+	result.key = get_name_without_extension()
 	for srt_subtitle in subtitles:
 		var s51_subtitle = S51Subtitle.new()
 		s51_subtitle.initialize_with_srt_subtitle(srt_subtitle)
-		result.append(s51_subtitle)
+		result.subtitles.append(s51_subtitle)
 	return result
 
 

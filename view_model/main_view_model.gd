@@ -5,7 +5,9 @@ var alternative_timecode_language_code = "pt-BR"
 
 var convert_initial_time_to_zero = true
 
-var srt_files_paths = []
+var srt_files_paths_as_text = ""
+
+var srt_files_paths_as_array: Array setget _set_srt_files_paths_as_array, _get_srt_files_paths_as_array
 
 var alternative_timecode_srt_files_paths = []
 
@@ -13,13 +15,22 @@ var subtitle_service = SubtitleService.new()
 
 
 func save_csv(csv_file_path):
-	var srt_files = _batch_load_srt(srt_files_paths)
+	var srt_files = _batch_load_srt(self.srt_files_paths_as_array)
 	var alternative_language_timecode_srt_files = _batch_load_srt(alternative_timecode_srt_files_paths)
 	var s51_subtitles = _convert_srt_files_to_s51_subtitles(srt_files)
 	var s51_alternative_lang_timecodes_subtitles = _convert_srt_files_to_s51_subtitles(alternative_language_timecode_srt_files)
-	subtitle_service.add_alternative_timecodes_to_subtitles(s51_alternative_lang_timecodes_subtitles, s51_subtitles, alternative_timecode_language_code)
+	for subtitle in s51_subtitles:
+		var alternative_timecode_subtitles = _find_by_key(s51_alternative_lang_timecodes_subtitles, subtitle.key)
+		subtitle.add_alternative_timecodes(alternative_timecode_subtitles, alternative_timecode_language_code)
 	var csv_rows_and_columns = subtitle_service.convert_subtitles_to_csv_rows_and_columns(s51_subtitles)
 	subtitle_service.save_csv(csv_rows_and_columns, csv_file_path)
+
+
+func _find_by_key(subtitles: Array, key: String) -> S51Subtitles:
+	for subtitle in subtitles:
+		if subtitle.key == key:
+			return subtitle
+	return null
 
 
 func _batch_load_srt(paths) -> Array:
@@ -32,8 +43,20 @@ func _batch_load_srt(paths) -> Array:
 	return result
 
 
-func _convert_srt_files_to_s51_subtitles(srt_files: Array) -> Dictionary:
-	var result = {}
+func _convert_srt_files_to_s51_subtitles(srt_files: Array) -> Array:
+	var result = []
 	for srt_file in srt_files:
-		result[srt_file.get_name_without_extension()] = srt_file.convert_to_internal_format_subtitles()
+		result.append(srt_file.convert_to_s51_subtitles())
 	return result
+
+
+func _set_srt_files_paths_as_array(array: Array):
+	srt_files_paths_as_text = ""
+	for path in array:
+		if srt_files_paths_as_text.length() > 0:
+			srt_files_paths_as_text += "\n"
+		srt_files_paths_as_text += path
+
+
+func _get_srt_files_paths_as_array() -> Array:
+	return srt_files_paths_as_text.split("\n", false)

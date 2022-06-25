@@ -40,7 +40,7 @@ line 5.""")
 	asserts.is_equal(subtitles[1].text, "Line 3,\nline 4,\nline 5.")
 
 
-func test_should_convert_to_internal_format():
+func test_should_convert_to_s51_format():
 	# given:
 	var subtitle1 = SRTSubtitle.new()
 	subtitle1.time.string_value = "00:00:00,000 --> 00:00:10,000"
@@ -50,17 +50,19 @@ func test_should_convert_to_internal_format():
 	subtitle2.time.string_value = "00:00:20,000 --> 00:00:30,000"
 	subtitle2.text = "Line 2."
 	
+	srt_file.file_path = "C:/Folder/TheKey.srt"
 	srt_file.subtitles = [subtitle1, subtitle2]
 	
 	# when:
-	var result = srt_file.convert_to_internal_format_subtitles()
+	var result = srt_file.convert_to_s51_subtitles()
 	
 	# then:
-	asserts.is_equal(result.size(), 2)
-	asserts.is_equal(result[0].time.to_string(), "00:00:00,000 --> 00:00:10,000")
-	asserts.is_equal(result[0].text, "Line 1.")
-	asserts.is_equal(result[1].time.to_string(), "00:00:20,000 --> 00:00:30,000")
-	asserts.is_equal(result[1].text, "Line 2.")
+	asserts.is_equal(result.key, "TheKey")
+	asserts.is_equal(result.subtitles.size(), 2)
+	asserts.is_equal(result.subtitles[0].time.to_string(), "00:00:00,000 --> 00:00:10,000")
+	asserts.is_equal(result.subtitles[0].text, "Line 1.")
+	asserts.is_equal(result.subtitles[1].time.to_string(), "00:00:20,000 --> 00:00:30,000")
+	asserts.is_equal(result.subtitles[1].text, "Line 2.")
 
 
 func test_should_offset_to_zero():

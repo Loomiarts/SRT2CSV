@@ -10,10 +10,10 @@ func _ready():
 
 
 func _refresh_ui():
-	$PanelContainer/VBox/XFilesSelectedLabel.text = "%d .srt files selected." % view_model.srt_files_paths.size()
 	$PanelContainer/VBox/ConvertInitialTimeToZeroCheckBox.pressed = view_model.convert_initial_time_to_zero
 	$PanelContainer/VBox/HBox/LanguageCodeEdit.text = view_model.alternative_timecode_language_code
 	$PanelContainer/VBox/XAlternativeTimecodesFilesSelectedLabel.text = "%d .srt files selected for alternative timecodes." % view_model.alternative_timecode_srt_files_paths.size()
+	$PanelContainer/VBox/SelectedPathsEditText.text = view_model.srt_files_paths_as_text
 
 
 func _on_ConvertInitialTimeToZeroCheckBox_toggled(button_pressed):
@@ -29,7 +29,7 @@ func _on_SaveButton_pressed():
 
 
 func _on_OpenSrcFilesDialog_files_selected(paths):
-	view_model.srt_files_paths = Array(paths)
+	view_model.srt_files_paths_as_array = paths
 	_refresh_ui()
 
 
@@ -48,3 +48,8 @@ func _on_SelectAlternativeTimecodesSRTButton_pressed():
 
 func _on_OpenAlternativeLangSrtFilesDialog_files_selected(paths):
 	view_model.alternative_timecode_srt_files_paths = paths
+	_refresh_ui()
+
+
+func _on_SelectedPathsEditText_text_changed():
+	view_model.srt_files_paths_as_text = $PanelContainer/VBox/SelectedPathsEditText.text

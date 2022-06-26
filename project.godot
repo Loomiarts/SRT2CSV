@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "CSVSubtitlesFile",
+"language": "GDScript",
+"path": "res://model/csv_subtitles_file.gd"
+}, {
+"base": "Reference",
+"class": "CSVSubtitlesRow",
+"language": "GDScript",
+"path": "res://model/csv_subtitles_row.gd"
+}, {
+"base": "Reference",
 "class": "MainViewModel",
 "language": "GDScript",
 "path": "res://view_model/main_view_model.gd"
@@ -60,6 +70,8 @@ _global_script_classes=[ {
 "path": "res://addons/WAT/test/test.gd"
 } ]
 _global_script_class_icons={
+"CSVSubtitlesFile": "",
+"CSVSubtitlesRow": "",
 "MainViewModel": "",
 "S51Subtitle": "",
 "S51Subtitles": "",

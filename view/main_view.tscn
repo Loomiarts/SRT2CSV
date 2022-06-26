@@ -96,7 +96,7 @@ text = "X .srt files selected for alternative timecodes."
 margin_top = 488.0
 margin_right = 1010.0
 margin_bottom = 502.0
-text = "3. Save the CSV file:"
+text = "3. Save the CSV file (existing files will be updated with new values, keeping existing keys and comments):"
 uppercase = true
 
 [node name="ConvertInitialTimeToZeroCheckBox" type="CheckBox" parent="PanelContainer/VBox"]

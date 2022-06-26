@@ -24,10 +24,10 @@ func load_csv(file_path: String) -> CSVSubtitlesFile:
 	var file = File.new()
 	var open_status = file.open(file_path, File.READ)
 	if open_status == OK:
-		var line = file.get_csv_line()
-		while line != null:
+		var line = Array(file.get_csv_line())
+		while line.size() > 0 and line != [""]:
 			result.add_row(line)
-			line = file.get_csv_line()
+			line = Array(file.get_csv_line())
 	file.close()
 	return result
 

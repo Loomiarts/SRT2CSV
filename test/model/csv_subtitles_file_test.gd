@@ -7,6 +7,55 @@ func pre():
 	csv_subtitles_file = CSVSubtitlesFile.new()
 
 
+func test_should_add_row():
+	# given:
+	var existing_row = CSVSubtitlesRow.new()
+	existing_row.key = "key1"
+	existing_row.subtitles = "subtitles line1"
+	existing_row.comment = "some comment"
+	csv_subtitles_file.rows = [existing_row]
+	
+	# when:
+	csv_subtitles_file.add_row(["newkey", "new subtitles", "new comment"])
+	csv_subtitles_file.add_row(["newkeywithoutcomment", "new subtitles 2"])
+	csv_subtitles_file.add_row(["newkeywithoutcontent"])
+	csv_subtitles_file.add_row([])
+	
+	# then:
+	asserts.is_equal(csv_subtitles_file.rows.size(), 4)
+	asserts.is_equal(csv_subtitles_file.rows[0].key, "key1")
+	asserts.is_equal(csv_subtitles_file.rows[0].subtitles, "subtitles line1")
+	asserts.is_equal(csv_subtitles_file.rows[0].comment, "some comment")
+	asserts.is_equal(csv_subtitles_file.rows[1].key, "newkey")
+	asserts.is_equal(csv_subtitles_file.rows[1].subtitles, "new subtitles")
+	asserts.is_equal(csv_subtitles_file.rows[1].comment, "new comment")
+	asserts.is_equal(csv_subtitles_file.rows[2].key, "newkeywithoutcomment")
+	asserts.is_equal(csv_subtitles_file.rows[2].subtitles, "new subtitles 2")
+	asserts.is_equal(csv_subtitles_file.rows[2].comment, "")
+	asserts.is_equal(csv_subtitles_file.rows[3].key, "newkeywithoutcontent")
+	asserts.is_equal(csv_subtitles_file.rows[3].subtitles, "")
+	asserts.is_equal(csv_subtitles_file.rows[3].comment, "")
+
+
+func test_should_ignore_row_with_key_and_sourcestring_values_when_add_row():
+	# given:
+	var existing_row = CSVSubtitlesRow.new()
+	existing_row.key = "key1"
+	existing_row.subtitles = "subtitles line1"
+	existing_row.comment = "some comment"
+	csv_subtitles_file.rows = [existing_row]
+	
+	# when:
+	csv_subtitles_file.add_row(["Key", "SourceString"])
+	csv_subtitles_file.add_row(["Key", "SourceString", "Comment"])
+	
+	# then:
+	asserts.is_equal(csv_subtitles_file.rows.size(), 1)
+	asserts.is_equal(csv_subtitles_file.rows[0].key, "key1")
+	asserts.is_equal(csv_subtitles_file.rows[0].subtitles, "subtitles line1")
+	asserts.is_equal(csv_subtitles_file.rows[0].comment, "some comment")
+
+
 func test_should_convert_to_string():
 	# given:
 	var row1 = CSVSubtitlesRow.new()

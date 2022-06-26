@@ -19,23 +19,21 @@ func load_srt_file(path: String) -> SRTFile:
 	return srt_file
 
 
-func save_csv(rows_and_columns: Array, file_path: String):
-	var file_content = convert_rows_and_columns_to_csv(rows_and_columns)
+func load_csv(file_path: String) -> CSVSubtitlesFile:
+	var result = CSVSubtitlesFile.new()
+	var file = File.new()
+	var open_status = file.open(file_path, File.READ)
+	if open_status == OK:
+		var line = file.get_csv_line()
+		while line != null:
+			result.add_row(line)
+			line = file.get_csv_line()
+	file.close()
+	return result
+
+
+func save_csv(csv: CSVSubtitlesFile, file_path: String):
 	var file = File.new()
 	file.open(file_path, File.WRITE)
-	file.store_string(file_content)
+	file.store_string(csv.to_string())
 	file.close()
-
-
-func convert_rows_and_columns_to_csv(rows_and_columns: Array) -> String:
-	var csv = ""
-	for row in rows_and_columns:
-		if csv.length() > 0:
-			csv += "\n"
-		var column_str = ""
-		for column in row:
-			if column_str.length() > 0:
-				column_str += ","
-			column_str += "\"%s\"" % column.replace("\"", "\"\"")
-		csv += column_str
-	return csv

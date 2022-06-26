@@ -15,6 +15,7 @@ var subtitle_service = SubtitleService.new()
 
 
 func save_csv(csv_file_path):
+	var csv_file = subtitle_service.load_csv(csv_file_path)
 	var srt_files = _batch_load_srt(self.srt_files_paths_as_array)
 	var alternative_language_timecode_srt_files = _batch_load_srt(alternative_timecode_srt_files_paths)
 	var s51_subtitles = _convert_srt_files_to_s51_subtitles(srt_files)
@@ -22,8 +23,8 @@ func save_csv(csv_file_path):
 	for subtitle in s51_subtitles:
 		var alternative_timecode_subtitles = _find_by_key(s51_alternative_lang_timecodes_subtitles, subtitle.key)
 		subtitle.add_alternative_timecodes(alternative_timecode_subtitles, alternative_timecode_language_code)
-	var csv_rows_and_columns = subtitle_service.convert_subtitles_to_csv_rows_and_columns(s51_subtitles)
-	subtitle_service.save_csv(csv_rows_and_columns, csv_file_path)
+	csv_file.update(s51_subtitles)
+	subtitle_service.save_csv(csv_file, csv_file_path)
 
 
 func _find_by_key(subtitles: Array, key: String) -> S51Subtitles:
